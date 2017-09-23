@@ -1,18 +1,25 @@
-from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from django.http import JsonResponse
 
-myList = []
+# dict
+dictForJason = {}
+
+# list
+personList = []
 
 
 @csrf_exempt
-def addUser(request):
+def add_user(request):
     if request.method == 'POST':
         name = request.GET['name']
         surname = request.GET['surname']
-        myList.append(name + ' ' + surname + '\n')
+        personList.append(name.title() + ' ' + surname.title())
         return HttpResponse(request)
 
 
-def showList(request):
+def show_list(request):
     if request.method == 'GET':
-        return HttpResponse(myList)
+        for i in range(len(personList)):
+            dictForJason[i + 1] = personList[i]
+        return JsonResponse(dictForJason)
