@@ -20,6 +20,6 @@ from blog import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^user/', views.hello),
+    url(r'^user/', views.addUser),
     url(r'^users/', views.showList),
 ]
